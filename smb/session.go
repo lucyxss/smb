@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	
 	"log"
 	"net"
 	"runtime/debug"
@@ -57,7 +58,7 @@ func NewSession(opt Options, debug bool) (s *Session, err error) {
 		return nil, err
 	}
 
-	conn, err := net.Dial("tcp", fmt.Sprintf("%s:%d", opt.Host, opt.Port))
+	conn, err := net.DialTimeout("tcp", fmt.Sprintf("%s:%d", opt.Host, opt.Port),time.Second*5)
 	if err != nil {
 		return
 	}
